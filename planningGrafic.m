@@ -1,4 +1,4 @@
-function  timing = planningGrafic()
+function  allRoutes = planningGrafic()
 
 
 
@@ -49,17 +49,20 @@ end
 
 %to plot everything every station has an id code made here in a struct
 stationID.LE = 1;
-stationID.LA = 2;
+stationID.LA = 3;
 stationID.ST = 4;
-stationID.AL = 6;
+stationID.AL = 5;
 stationID.HA = 7;
-stationID.AA = 3;
-stationID.HE = 5;
+stationID.AA = 2;
+stationID.HE = 6;
+
+
+            
 
 close all 
 figure
-
 trains = fieldnames(timing);
+count =0;
 for i=1:length(trains)
    %if (trains{i}(2) == '1')
        stations = fieldnames(timing.(trains{i}));
@@ -89,27 +92,68 @@ for i=1:length(trains)
          
                
        end
-       
+        
         times = sortrows(times,2); %so the plot is in the right order
         disp(trains{i});
         disp(times);
-      
+        allRoutes.(trains{i}) = times;
         
         amount = size(times);
-        colors = 'rgbcmyk';
-        choice = randi(length(colors));
         
+        %to make the color choice variable (not the same paterns for lines
+        colors = ['r' ,'g', 'b', 'c', 'm', 'y', 'k', cellstr('#77ac30'), cellstr('#7e2f8e')];
+     
         if amount(1,1) ~= 1 %remove useless trains 
-            plot( times(:,2), times(:,1), '-*', 'DisplayName', trains{i}, 'LineWidth',1.5, 'MarkerEdgeColor', colors(choice));
-           
+            count = count+1;
+            
+            if count > 9 
+                count = count - 8; 
+            end
+            
+            %make a new table with value's under 60 (and two plots to make
+            %it all within an hour) 
+            %if trains{i}(1) == 'K'  %to check only one train 
+            if (times(1,2) > 60)
+                times(:,2) = times(:,2) - 60;
+                 plot( times(:,2), times(:,1), '-*', 'DisplayName', trains{i},'Color',colors{count}, 'LineWidth',2.5, 'MarkerEdgeColor', colors{length(colors)-count+1});
+                 text(times(1,2),times(1,1), 'D' , 'FontSize', 15);
+                 text(times(length(times),2),times(length(times),1), 'A' , 'FontSize', 15);
+            else
+               for k=1:length(times)
+                  if  times(k,2) > 60 
+                      %interpolate at value x = 60
+                      y60 = times(k-1,1) + ((60 - times(k-1,2))/(times(k,2)-times(k-1,2))) * (times(k,1) - times(k-1,1));
+                      subTimesNorm = [times((1:k-1),(1:2)) ; y60 60];
 
+                      subTimesChange = [times((k:length(times)), (1:2))];
+                      subTimesChange(:,2) = subTimesChange(:,2) - 60; 
+                      subTimesChange = [y60 0;subTimesChange];
+                      plot( subTimesNorm(:,2), subTimesNorm(:,1), '-*',subTimesChange(:,2), subTimesChange(:,1), '-*', 'DisplayName',...
+                          trains{i},'Color',colors{count}, 'LineWidth',2.5, 'MarkerEdgeColor', colors{length(colors)-count+1});
+
+                      text(times(1,2),times(1,1), 'D' , 'FontSize', 15);
+                      text(subTimesChange(length(subTimesChange),2),subTimesChange(length(subTimesChange),1), 'A' , 'FontSize', 15);
+
+
+                      break;
+
+                  end
+                end
+               %end
+            end
+            
+          
+            
+            
+            %plot( times(:,2), times(:,1), '-*', 'Color', colors{count},'DisplayName', trains{i}, 'LineWidth',2.5, 'MarkerEdgeColor', colors{count});
+           
+            
             %to make the y axis readable
-            y_labels = {'Leuven';'Landen';'Aarschot';'Sint-Truiden';'Heist';'Alken';'Hasselt'};
+            y_labels = {'Leuven';'Aarschot';'Landen';'Sint-Truiden';'Alken';'Heist';'Hasselt'};
             y_values = [1;2;3;4;5;6;7];
             set(gca, 'Ytick',y_values,'YTickLabel',y_labels);
             
-            text(times(1,2),times(1,1), 'D' , 'FontSize', 15);
-            text(times(length(times),2),times(length(times),1), 'A' , 'FontSize', 15);
+            
 
             legend('FontSize',12);
             hold all
@@ -117,7 +161,9 @@ for i=1:length(trains)
 % end
   
 end
-
+yline(3);
+yline(4);
+yline(5);
 
 
 end
