@@ -63,6 +63,7 @@ close all
 figure
 trains = fieldnames(timing);
 count =0;
+%compleet plot 
 for i=1:length(trains)
    %if (trains{i}(2) == '1')
        stations = fieldnames(timing.(trains{i}));
@@ -94,8 +95,7 @@ for i=1:length(trains)
        end
         
         times = sortrows(times,2); %so the plot is in the right order
-        disp(trains{i});
-        disp(times);
+     
         allRoutes.(trains{i}) = times;
         
         amount = size(times);
@@ -128,8 +128,11 @@ for i=1:length(trains)
                       subTimesChange = [times((k:length(times)), (1:2))];
                       subTimesChange(:,2) = subTimesChange(:,2) - 60; 
                       subTimesChange = [y60 0;subTimesChange];
-                      plot( subTimesNorm(:,2), subTimesNorm(:,1), '-*',subTimesChange(:,2), subTimesChange(:,1), '-*', 'DisplayName',...
-                          trains{i},'Color',colors{count}, 'LineWidth',2.5, 'MarkerEdgeColor', colors{length(colors)-count+1});
+                      plot( subTimesNorm(:,2), subTimesNorm(:,1), '-*','HandleVisibility','off','Color',...
+                          colors{count}, 'LineWidth',2.5, 'MarkerEdgeColor', colors{length(colors)-count+1});
+                      
+                      plot(subTimesChange(:,2), subTimesChange(:,1), '-*','DisplayName' ,trains{i},'Color',colors{count},...
+                          'LineWidth',2.5, 'MarkerEdgeColor', colors{length(colors)-count+1})
 
                       text(times(1,2),times(1,1), 'D' , 'FontSize', 15);
                       text(subTimesChange(length(subTimesChange),2),subTimesChange(length(subTimesChange),1), 'A' , 'FontSize', 15);
@@ -161,10 +164,80 @@ for i=1:length(trains)
 % end
   
 end
-yline(3);
-yline(4);
-yline(5);
+yline(3,'HandleVisibility','off');
+yline(4,'HandleVisibility','off');
+yline(5,'HandleVisibility','off');
 
+
+%plot for each track 
+tracks = ['C','M','E','K'];
+colors = ['r' ,'g', 'b', 'c', 'm', 'y', 'k', cellstr('#77ac30'), cellstr('#7e2f8e')];
+for j=1:length(tracks)
+    figure 
+    
+    count = 1;
+    for i=1:length(trains)
+        if (trains{i}(1) == tracks(j))
+           
+           %start to plot
+           %make a new table with value's under 60 (and two plots to make
+            %it all within an hour) 
+           disp(length(allRoutes.(trains{i})));
+            if (allRoutes.(trains{i})(1,2) > 60)
+                allRoutes.(trains{i})(:,2) = allRoutes.(trains{i})(:,2) - 60;
+                 plot( allRoutes.(trains{i})(:,2), allRoutes.(trains{i})(:,1), '-*','Color',colors{count}, 'DisplayName', trains{i}, 'LineWidth',2.5);
+                 text(allRoutes.(trains{i})(1,2),allRoutes.(trains{i})(1,1), 'D' , 'FontSize', 15);
+                 %text(allRoutes.(trains{i})(length(allRoutes.(trains{i})),2),allRoutes.(trains{i})(length(allRoutes.(trains{i})),1), 'A' , 'FontSize', 15);
+                  string = ['track '  tracks(j)];
+                    title(string);
+                 
+            else
+               for k=1:length(allRoutes.(trains{i}))
+                   disp(trains{i});
+                   disp(allRoutes.(trains{i}));
+                  if  allRoutes.(trains{i})(k,2) > 60 
+                      %interpolate at value x = 60
+                      y60 = allRoutes.(trains{i})(k-1,1) + ((60 - allRoutes.(trains{i})(k-1,2))/(allRoutes.(trains{i})(k,2)-allRoutes.(trains{i})(k-1,2))) * (allRoutes.(trains{i})(k,1) - allRoutes.(trains{i})(k-1,1));
+                      subTimesNorm = [allRoutes.(trains{i})((1:k-1),(1:2)) ; y60 60];
+
+                      subTimesChange = [allRoutes.(trains{i})((k:length(allRoutes.(trains{i}))), (1:2))];
+                      subTimesChange(:,2) = subTimesChange(:,2) - 60; 
+                      subTimesChange = [y60 0;subTimesChange];
+                      
+                      plot( subTimesNorm(:,2), subTimesNorm(:,1), '-*','HandleVisibility','off',...
+                          'Color',colors{count}, 'LineWidth',2.5);
+                      plot(subTimesChange(:,2), subTimesChange(:,1), '-*','Color',colors{count},...
+                          'DisplayName',trains{i}, 'LineWidth',2.5)
+                        
+                      text(allRoutes.(trains{i})(1,2),allRoutes.(trains{i})(1,1), 'D' , 'FontSize', 15);
+                      text(subTimesChange(length(subTimesChange),2),subTimesChange(length(subTimesChange),1), 'A' , 'FontSize', 15);
+                      
+                      
+                      string = ['track '  tracks(j)];
+                      title(string);
+                 
+
+                      break;
+
+                  end
+                end
+               
+            end
+            hold all
+           count = count +1;
+        end
+    end
+      %to make the y axis readable
+    y_labels = {'Leuven';'Aarschot';'Landen';'Sint-Truiden';'Alken';'Heist';'Hasselt'};
+    y_values = [1;2;3;4;5;6;7];
+    set(gca, 'Ytick',y_values,'YTickLabel',y_labels);
+    
+    yline(3, 'HandleVisibility','off');
+    yline(4, 'HandleVisibility','off');
+    yline(5, 'HandleVisibility','off');
+    legend('FontSize',12);
+    
+end
 
 end
 
