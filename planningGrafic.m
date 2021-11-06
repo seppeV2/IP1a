@@ -177,7 +177,9 @@ for j=1:length(tracks)
     hold all
     count = 1;
     for i=1:length(trains)
-        if (trains{i}(1) == tracks(j))
+        amount = size(allRoutes.(trains{i}));
+        disp(amount);
+        if (trains{i}(1) == tracks(j) && amount(1,1) ~= 1 )
            
            %start to plot
            %make a new table with value's under 60 (and two plots to make
@@ -185,9 +187,11 @@ for j=1:length(tracks)
             disp(trains{i});
             if (allRoutes.(trains{i})(1,2) >= 60)
                 allRoutes.(trains{i})(:,2) = allRoutes.(trains{i})(:,2) - 60;
+                stops = length(allRoutes.(trains{i})); 
+               
                  plot( allRoutes.(trains{i})(:,2), allRoutes.(trains{i})(:,1), '-*','Color',colors{count}, 'DisplayName', trains{i}, 'LineWidth',2.5);
                  text(allRoutes.(trains{i})(1,2),allRoutes.(trains{i})(1,1), 'D' , 'FontSize', 15);
-                 %text(allRoutes.(trains{i})(length(allRoutes.(trains{i})),2),allRoutes.(trains{i})(length(allRoutes.(trains{i})),1), 'A' , 'FontSize', 15);
+                 text(allRoutes.(trains{i})( stops ,2),allRoutes.(trains{i})(stops ,1), 'A' , 'FontSize', 15);
                   string = ['track '  tracks(j)];
                     title(string);
                   
