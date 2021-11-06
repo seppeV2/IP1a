@@ -174,7 +174,7 @@ tracks = ['C','M','E','K'];
 colors = ['r' ,'g', 'b', 'c', 'm', 'y', 'k', cellstr('#77ac30'), cellstr('#7e2f8e')];
 for j=1:length(tracks)
     figure 
-    
+    hold all
     count = 1;
     for i=1:length(trains)
         if (trains{i}(1) == tracks(j))
@@ -182,30 +182,36 @@ for j=1:length(tracks)
            %start to plot
            %make a new table with value's under 60 (and two plots to make
             %it all within an hour) 
-           disp(length(allRoutes.(trains{i})));
-            if (allRoutes.(trains{i})(1,2) > 60)
+            disp(trains{i});
+            if (allRoutes.(trains{i})(1,2) >= 60)
                 allRoutes.(trains{i})(:,2) = allRoutes.(trains{i})(:,2) - 60;
                  plot( allRoutes.(trains{i})(:,2), allRoutes.(trains{i})(:,1), '-*','Color',colors{count}, 'DisplayName', trains{i}, 'LineWidth',2.5);
                  text(allRoutes.(trains{i})(1,2),allRoutes.(trains{i})(1,1), 'D' , 'FontSize', 15);
                  %text(allRoutes.(trains{i})(length(allRoutes.(trains{i})),2),allRoutes.(trains{i})(length(allRoutes.(trains{i})),1), 'A' , 'FontSize', 15);
                   string = ['track '  tracks(j)];
                     title(string);
+                  
                  
             else
                for k=1:length(allRoutes.(trains{i}))
-                   disp(trains{i});
-                   disp(allRoutes.(trains{i}));
+                   
                   if  allRoutes.(trains{i})(k,2) > 60 
                       %interpolate at value x = 60
                       y60 = allRoutes.(trains{i})(k-1,1) + ((60 - allRoutes.(trains{i})(k-1,2))/(allRoutes.(trains{i})(k,2)-allRoutes.(trains{i})(k-1,2))) * (allRoutes.(trains{i})(k,1) - allRoutes.(trains{i})(k-1,1));
                       subTimesNorm = [allRoutes.(trains{i})((1:k-1),(1:2)) ; y60 60];
+                      
 
                       subTimesChange = [allRoutes.(trains{i})((k:length(allRoutes.(trains{i}))), (1:2))];
                       subTimesChange(:,2) = subTimesChange(:,2) - 60; 
                       subTimesChange = [y60 0;subTimesChange];
                       
-                      plot( subTimesNorm(:,2), subTimesNorm(:,1), '-*','HandleVisibility','off',...
+                      disp(subTimesNorm);
+                      disp(subTimesChange);
+                      
+                      plot(subTimesNorm(:,2), subTimesNorm(:,1), '-*','HandleVisibility','off',...
                           'Color',colors{count}, 'LineWidth',2.5);
+    
+                      
                       plot(subTimesChange(:,2), subTimesChange(:,1), '-*','Color',colors{count},...
                           'DisplayName',trains{i}, 'LineWidth',2.5)
                         
@@ -215,7 +221,7 @@ for j=1:length(tracks)
                       
                       string = ['track '  tracks(j)];
                       title(string);
-                 
+                        
 
                       break;
 
@@ -223,7 +229,7 @@ for j=1:length(tracks)
                 end
                
             end
-            hold all
+            
            count = count +1;
         end
     end
