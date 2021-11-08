@@ -1,8 +1,8 @@
-function [] = basis (version)
+function [] = basis
 %2 versions
 %version 1: current situation, to compare with
 %version 2: Lindo result
-v=version;
+v=2;
 
 lindoRes = transformLindoData('lindoResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
