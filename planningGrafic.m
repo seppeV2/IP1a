@@ -178,7 +178,6 @@ for j=1:length(tracks)
     count = 1;
     for i=1:length(trains)
         amount = size(allRoutes.(trains{i}));
-        disp(amount);
         if (trains{i}(1) == tracks(j) && amount(1,1) ~= 1 )
            
            %start to plot
@@ -194,6 +193,7 @@ for j=1:length(tracks)
                  text(allRoutes.(trains{i})( stops ,2),allRoutes.(trains{i})(stops ,1), 'A' , 'FontSize', 15);
                   string = ['track '  tracks(j)];
                     title(string);
+                   disp(allRoutes.(trains{i}));
                   
                  
             else
