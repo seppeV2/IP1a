@@ -1,8 +1,8 @@
-function [] = basis (version)
+function [] = basis
 %2 versions
 %version 1: current situation, to compare with
 %version 2: Lindo result
-v=version;
+v=2;
 
 lindoRes = transformLindoData('lindoResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
@@ -311,7 +311,7 @@ Kav=3;
 Mav=5;
 
 %number of simulation runs
-a=5000;
+a=500000;
 %passengers_arriving_late: passengers arriving late more minutes than "too_late" 
 %cost_arriving_late is the cost associated with arriving late
 %delay contains the minutes of delay
@@ -437,6 +437,7 @@ for i=1:1:a
 
 %K11C21
    if v==2
+
       if ak11ha+TT>DC21Ha(v);	
           missedK11C21 = missedK11C21 +1;                       %missed the transfer
          %waiting for the next train, in this case E31!!!
@@ -470,7 +471,7 @@ for i=1:1:a
 %K11C10
    if v==2
       if ak11ha+TT> DC10Ha(v)
-          missedK11C10 = missedK11C10 +1;
+         missedK11C10 = missedK11C10 +1;
          cmk11c10= (DC20Ha(v)-ak11ha-TT)*TK11C10*WMT;
          pmk11c10=TK11C10;
          plk11c10=TK11C10;
@@ -500,7 +501,8 @@ for i=1:1:a
     end
 %C10K20
       if ac10ha+TT> DK20Ha(v);
-          missedC10K20 = missedC10K20 +1;
+
+         missedC10K20 = missedC10K20 +1;
          cmc10k20=(DK30Ha(v)-ac10ha-TT)*TC10K20*WMT;
          pmc10k20=TC10K20;
          plc10k20=TC10K20;
@@ -609,11 +611,29 @@ total_cost_through_passengers= sum(cost_through_passengers)/a
 total_cost_of_transfers= sum(cost_of_transfers)/a
 
 totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers + total_cost_through_passengers 
-missedC10K20
-missedK11C21
-missedK11C10
-missedK10E20
-missedK10M20
-missedE11K21
-missedM11K21
-missedM11K10
+
+
+barplot = [missedC10K20/(a/100)
+            missedK11C21/(a/100)
+            missedK11C10/(a/100)
+            missedK10E20/(a/100)
+            missedK10M20/(a/100)
+            missedE11K21/(a/100)
+            missedM11K21/(a/100)
+            missedM11K10/(a/100)];
+        
+names =  {'missedC10K20'
+            'missedK11C21'
+           'missedK11C10'
+            'missedK10E20'
+            'missedK10M20'
+            'missedE11K21'
+            'missedM11K21'
+            'missedM11K10'};
+        
+ figure 
+ bar(barplot);
+ set(gca,'xticklabel',names);
+ title('percentage missed trains');
+        
+

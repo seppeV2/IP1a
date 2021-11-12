@@ -1,4 +1,4 @@
-function  allRoutes = planningGrafic()
+function  [allRoutes,timing] = planningGrafic()
 
 
 
@@ -44,6 +44,7 @@ for i=1:length(names)
         end
    end
 end
+
 %% this section is to make the actual graph 
 % only plotting the trains 1 trains as the 2 trains don't have enough info
 
@@ -76,12 +77,23 @@ for i=1:length(trains)
            
            
            if (length(actions) == 2)
-               if actions{1}(1) == 'S'  
+               if actions{1}(1) == 'S' && actions{2}(1) == 'D'
                 times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{2})]];
                 times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{2})-timing.(trains{i}).(stations{j}).(actions{1}))]];
-               else
+                
+               elseif actions{1}(1) == 'D' && actions{2}(1) == 'S'
                 times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{1})]];
                 times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{1})-timing.(trains{i}).(stations{j}).(actions{2}))]];
+                
+               elseif actions{1}(1) == 'A' && actions{2}(1) == 'S'
+                times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{1})]];
+                times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{1})+timing.(trains{i}).(stations{j}).(actions{2}))]];
+                
+                elseif actions{1}(1) == 'S' && actions{2}(1) == 'A'
+                times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{2})]];
+                times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{2})+timing.(trains{i}).(stations{j}).(actions{1}))]];
+                
+            
                end
             
                %some stations of the second train don't have a D-time or an
@@ -178,7 +190,6 @@ for j=1:length(tracks)
     count = 1;
     for i=1:length(trains)
         amount = size(allRoutes.(trains{i}));
-        disp(amount);
         if (trains{i}(1) == tracks(j) && amount(1,1) ~= 1 )
            
            %start to plot
@@ -194,6 +205,7 @@ for j=1:length(tracks)
                  text(allRoutes.(trains{i})( stops ,2),allRoutes.(trains{i})(stops ,1), 'A' , 'FontSize', 15);
                   string = ['track '  tracks(j)];
                     title(string);
+                   disp(allRoutes.(trains{i}));
                   
                  
             else
