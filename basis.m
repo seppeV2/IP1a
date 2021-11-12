@@ -318,6 +318,14 @@ a=5000;
 too_late=3;
 %long_transfer_time if passengers have to wait more than "WA" minutes
 WA=20;
+missedC10K20 = 0;
+missedK11C21 = 0;
+missedK11C10 = 0;
+missedK10E20 = 0;
+missedK10M20 = 0;
+missedE11K21 = 0;
+missedM11K21 = 0;
+missedM11K10 = 0;
 
 for i=1:1:a
 	%determine the real arriving times
@@ -426,9 +434,15 @@ for i=1:1:a
 	cost_through_passengers(i)=pzc10+pze11+pzk11+pzk10+pzm11;
  
    %transfers
+
 %K11C21
    if v==2
+<<<<<<< HEAD
       if ak11ha+TT>DC21Ha(v); %missed the transfer
+=======
+      if ak11ha+TT>DC21Ha(v);	
+          missedK11C21 = missedK11C21 +1;                       %missed the transfer
+>>>>>>> main
          %waiting for the next train, in this case E31!!!
          cmk11c21= (DE31Ha(v)-ak11ha-TT)*TK11C21*WMT;        %cost of missed transfer
          pmk11c21=TK11C21;                                   %number_passengers_missed
@@ -460,7 +474,11 @@ for i=1:1:a
 %K11C10
    if v==2
       if ak11ha+TT> DC10Ha(v)
+<<<<<<< HEAD
          
+=======
+          missedK11C10 = missedK11C10 +1;
+>>>>>>> main
          cmk11c10= (DC20Ha(v)-ak11ha-TT)*TK11C10*WMT;
          pmk11c10=TK11C10;
          plk11c10=TK11C10;
@@ -490,7 +508,8 @@ for i=1:1:a
     end
 %C10K20
       if ac10ha+TT> DK20Ha(v);
-         
+
+         missedC10K20 = missedC10K20 +1;
          cmc10k20=(DK30Ha(v)-ac10ha-TT)*TC10K20*WMT;
          pmc10k20=TC10K20;
          plc10k20=TC10K20;
@@ -505,6 +524,7 @@ for i=1:1:a
       end
 %K10E20
    if ak10le+TT>DE20Le(v)
+       missedK10E20 = missedK10E20 +1;
       cmk10e20= (DE30Le(v)-ak10le-TT)*TK10E20*WMT;
       pmk10e20=TK10E20;
       plk10e20=TK10E20;
@@ -519,6 +539,7 @@ for i=1:1:a
    end
 %K10M20
 	if ak10le+TT>DM20Le(v)
+        missedK10M20 = missedK10M20 +1;
       cmk10m20= (DM30Le(v)-ak10le-TT)*TK10M20*WMT;
       pmk10m20=TK10M20; 
       plk10m20=TK10M20;
@@ -533,6 +554,7 @@ for i=1:1:a
    end
 %E11K21
 	if ae11le+TT>DK21Le(v)
+        missedE11K21 = missedE11K21 +1;
       cme11k21=(DK31Le(v)-ae11le-TT)*TE11K21*WMT;
       pme11k21=TE11K21;
       ple11k21=TE11K21;
@@ -548,6 +570,7 @@ for i=1:1:a
 
 %M11K21 & M21K31
 	if am11le+TT>DK21Le(v)
+        missedM11K21 = missedM11K21 +1;
       cmm11k21=(DK31Le(v)-am11le-TT)*TM11K21*WMT;
       pmm11k21=TM11K21; 
       plm11k21=TM11K21;
@@ -562,6 +585,7 @@ for i=1:1:a
    end
 %M11K10
 	if am11le+TT>DK10Le(v)
+        missedM11K10 = missedM11K10 +1;
       cmm11k10=(DK20Le(v)-am11le-TT)*TM11K10*WMT;
       pmm11k10=TM11K10; 
       plm11k10=TM11K10;
@@ -594,3 +618,11 @@ total_cost_through_passengers= sum(cost_through_passengers)/a
 total_cost_of_transfers= sum(cost_of_transfers)/a
 
 totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers + total_cost_through_passengers 
+missedC10K20
+missedK11C21
+missedK11C10
+missedK10E20
+missedK10M20
+missedE11K21
+missedM11K21
+missedM11K10
