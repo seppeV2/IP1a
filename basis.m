@@ -428,7 +428,7 @@ for i=1:1:a
    %transfers
 %K11C21
    if v==2
-      if ak11ha+TT>DC21Ha(v);								%missed the transfer
+      if ak11ha+TT>DC21Ha(v); %missed the transfer
          %waiting for the next train, in this case E31!!!
          cmk11c21= (DE31Ha(v)-ak11ha-TT)*TK11C21*WMT;        %cost of missed transfer
          pmk11c21=TK11C21;                                   %number_passengers_missed
@@ -460,6 +460,7 @@ for i=1:1:a
 %K11C10
    if v==2
       if ak11ha+TT> DC10Ha(v)
+         
          cmk11c10= (DC20Ha(v)-ak11ha-TT)*TK11C10*WMT;
          pmk11c10=TK11C10;
          plk11c10=TK11C10;
@@ -489,6 +490,7 @@ for i=1:1:a
     end
 %C10K20
       if ac10ha+TT> DK20Ha(v);
+         
          cmc10k20=(DK30Ha(v)-ac10ha-TT)*TC10K20*WMT;
          pmc10k20=TC10K20;
          plc10k20=TC10K20;
