@@ -1,4 +1,4 @@
-function [] = basis
+sfunction [] = basis
 %2 versions
 %version 1: current situation, to compare with
 %version 2: Lindo result
