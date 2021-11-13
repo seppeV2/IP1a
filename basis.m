@@ -622,18 +622,18 @@ barplot = [missedC10K20/(a/100)
             missedM11K21/(a/100)
             missedM11K10/(a/100)];
         
-names =  {'missedC10K20'
-            'missedK11C21'
-           'missedK11C10'
-            'missedK10E20'
-            'missedK10M20'
-            'missedE11K21'
-            'missedM11K21'
-            'missedM11K10'};
+names =  {'C10K20'
+            'K11C21'
+           'K11C10'
+            'K10E20'
+            'K10M20'
+            'E11K21'
+            'M11K21'
+            'M11K10'};
         
  figure 
  bar(barplot);
  set(gca,'xticklabel',names);
- title('percentage missed trains');
+ title('percentage missed transfers');
         
 
