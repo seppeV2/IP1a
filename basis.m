@@ -613,27 +613,35 @@ total_cost_of_transfers= sum(cost_of_transfers)/a
 totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers + total_cost_through_passengers 
 
 
+%% Plotting all the information about delays and missed transfers
+
+%Missed transfers
+close all
+figure
 barplot = [missedC10K20/(a/100)
-            missedK11C21/(a/100)
-            missedK11C10/(a/100)
-            missedK10E20/(a/100)
-            missedK10M20/(a/100)
-            missedE11K21/(a/100)
-            missedM11K21/(a/100)
-            missedM11K10/(a/100)];
-        
+    missedK11C21/(a/100)
+    missedK11C10/(a/100)
+    missedK10E20/(a/100)
+    missedK10M20/(a/100)
+    missedE11K21/(a/100)
+    missedM11K21/(a/100)
+    missedM11K10/(a/100)];
+
 names =  {'C10K20'
-            'K11C21'
-           'K11C10'
-            'K10E20'
-            'K10M20'
-            'E11K21'
-            'M11K21'
-            'M11K10'};
-        
- figure 
- bar(barplot);
- set(gca,'xticklabel',names);
- title('percentage missed transfers');
+    'K11C21'
+    'K11C10'
+    'K10E20'
+    'K10M20'
+    'E11K21'
+    'M11K21'
+    'M11K10'};
+
+bar(barplot);
+set(gca,'xticklabel',names);
+title('percentage missed transfers');
+
+%Delay on trains
+
+%% 
         
 
