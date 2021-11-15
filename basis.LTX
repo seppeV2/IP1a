@@ -1,3 +1,11 @@
+!CHANGES
+!1) buffer time M11 12 or greater (great improvements)
+!2) increasing TT for K10E20 and K10M20 (didn't do much)
+!3) buffer time K11 increasing with x min
+
+
+
+
 min totcost
 
 s.t.
@@ -8,8 +16,8 @@ TTMIN=3
 TTK11C21-TTMIN>0
 TTK11C10-TTMIN>0
 TTC10K20-TTMIN>0
-TTK10E20-TTMIN>0
-TTK10M20-TTMIN>0 
+TTK10E20-TTMIN>2
+TTK10M20-TTMIN>2 
 TTE11K21-TTMIN>0
 TTM11K21-TTMIN>0
 TTM11K10-TTMIN>0
@@ -72,6 +80,9 @@ DK11Le+STK1La -DK11La=-27
 DK11La+STK1St -DK11St=-9
 DK11St+STK1Al -DK11Al=-8
 DK11Al+BK1AlHa -AK11Ha=-6
+
+BK1AlHa > 10
+
 AK11Ha<120
 STK1Al>1
 STK1St>1
@@ -87,6 +98,9 @@ STM0Aa>1
 DM11He<60
 DM11He+STM1Aa -DM11Aa=-12
 DM11Aa+BM1LeAa -AM11Le=-14
+
+BM1LeAa > 12 
+
 AM11Le<120
 STM1Aa>1
 
