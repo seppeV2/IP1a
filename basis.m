@@ -333,6 +333,8 @@ delayK10 = 0;
 delayK11 = 0;
 delayM11 = 0;
 
+delayArrayK10 = zeros(0,0);
+
 for i=1:1:a
     %determine the real arriving times
     %these are compared later with the scheduled arrival times
@@ -389,6 +391,7 @@ for i=1:1:a
     if ak10le>AK10Le(v)								%we have a delay
         delayK10 = delayK10 + 1;
         mk10=(ak10le-AK10Le(v));					%minutes of delay
+        delayArrayK10 = [delayArrayK10 mk10];
         pk10=mk10*ARK10Le*WLA;					%cost of this delay
         pzk10=0;
         if ak10le-AK10Le(v)>too_late
@@ -629,7 +632,7 @@ totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers 
 %Missed transfers
 close all
 figure
-subplot(3,1,1);
+subplot(2,1,1);
 barplot = [missedC10K20/(a/100)
     missedK11C21/(a/100)
     missedK11C10/(a/100)
@@ -651,25 +654,9 @@ names =  {'C10K20'
 bar(barplot);
 set(gca,'xticklabel',names);
 title('percentage missed transfers');
-
-%Delay on trains
-subplot(3,1,2); 
-barplot2 = [delayC10/(a/100)
-            delayE11/(a/100)
-            delayK10/(a/100)
-            delayK11/(a/100)
-            delayM11/(a/100)];
-names2 = {'delayC10'
-            'delayE11'
-            'delayK10'
-            'delayK11'
-            'delayM11'};
-bar(barplot2);
-set(gca,'xticklabel', names2);
-title('percentage trains with delay');
         
 %people missed transfer
-subplot(3,1,3);
+subplot(2,1,2);
 barplot = [missedC10K20*TC10K20
     missedK11C21*TK11C21
     missedK11C10*TK11C10
@@ -692,6 +679,45 @@ names =  {'C10K20'
 bar(barplot);
 set(gca,'xticklabel',names);
 title('people missed transfers');
+
+%Delay on trains
+figure
+subplot(2,1,1); 
+barplot2 = [delayC10/(a/100)
+            delayE11/(a/100)
+            delayK10/(a/100)
+            delayK11/(a/100)
+            delayM11/(a/100)];
+names2 = {'delayC10'
+            'delayE11'
+            'delayK10'
+            'delayK11'
+            'delayM11'};
+bar(barplot2);
+set(gca,'xticklabel', names2);
+title('percentage trains with delay');
+
+%people delay on trains
+subplot(2,1,2); 
+barplot2 = [delayC10*((ARC10Ha + TC10K20))
+            delayE11*(ARM11Le + TE11K21)
+            delayK10*(ARK10Le + TK10E20 + TK10M20)
+            delayK11*(ARK11Ha + TK11C10 + TK11C21)
+            delayM11*(ARM11Le + TM11K21 + TM11K10)];
+        
+names2 = {'delayC10'
+            'delayE11'
+            'delayK10'
+            'delayK11'
+            'delayM11'};
+bar(barplot2);
+set(gca,'xticklabel', names2);
+title('people trains with delay');
+
+figure 
+plot(delayArrayK10, '*');
+title('Delay on K10 train');
+
 %%
 
 
