@@ -629,6 +629,7 @@ totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers 
 %Missed transfers
 close all
 figure
+subplot(3,1,1);
 barplot = [missedC10K20/(a/100)
     missedK11C21/(a/100)
     missedK11C10/(a/100)
@@ -652,7 +653,7 @@ set(gca,'xticklabel',names);
 title('percentage missed transfers');
 
 %Delay on trains
-figure 
+subplot(3,1,2); 
 barplot2 = [delayC10/(a/100)
             delayE11/(a/100)
             delayK10/(a/100)
@@ -668,7 +669,7 @@ set(gca,'xticklabel', names2);
 title('percentage trains with delay');
         
 %people missed transfer
-figure
+subplot(3,1,3);
 barplot = [missedC10K20*TC10K20
     missedK11C21*TK11C21
     missedK11C10*TK11C10
