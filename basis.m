@@ -667,15 +667,6 @@ barplot = [missedC10K20*TC10K20
     missedM11K10*TM11K10];
 
 
-names =  {'C10K20'
-    'K11C21'
-    'K11C10'
-    'K10E20'
-    'K10M20'
-    'E11K21'
-    'M11K21'
-    'M11K10'};
-
 bar(barplot);
 set(gca,'xticklabel',names);
 title('people missed transfers');
@@ -705,18 +696,9 @@ barplot2 = [delayC10*((ARC10Ha + TC10K20))
             delayK11*(ARK11Ha + TK11C10 + TK11C21)
             delayM11*(ARM11Le + TM11K21 + TM11K10)];
         
-names2 = {'delayC10'
-            'delayE11'
-            'delayK10'
-            'delayK11'
-            'delayM11'};
 bar(barplot2);
 set(gca,'xticklabel', names2);
 title('people trains with delay');
-
-figure 
-plot(delayArrayK10, '*');
-title('Delay on K10 train');
 
 %%
 
