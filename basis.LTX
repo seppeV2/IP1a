@@ -2,6 +2,7 @@
 !1) buffer time M11 12 or greater (great improvements)
 !2) increasing TT for K10E20 and K10M20 (didn't do much)
 !3) buffer time K11 increasing with x min
+!4) increasing TT for M11K10 (percentage missed decreased to 5.38)
 
 
 
@@ -20,7 +21,7 @@ TTK10E20-TTMIN>2
 TTK10M20-TTMIN>2 
 TTE11K21-TTMIN>0
 TTM11K21-TTMIN>0
-TTM11K10-TTMIN>0
+TTM11K10-TTMIN>2
 
 !Ideal buffer times
 !Hasselt
@@ -100,6 +101,10 @@ DM11He+STM1Aa -DM11Aa=-12
 DM11Aa+BM1LeAa -AM11Le=-14
 
 BM1LeAa > 12 
+
+!variation of these don't work
+!BE1AALE >4
+!BK0LALE > 4
 
 AM11Le<120
 STM1Aa>1
