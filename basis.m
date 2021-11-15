@@ -667,7 +667,30 @@ bar(barplot2);
 set(gca,'xticklabel', names2);
 title('percentage trains with delay');
         
+%people missed transfer
+figure
+barplot = [missedC10K20*TC10K20
+    missedK11C21*TK11C21
+    missedK11C10*TK11C10
+    missedK10E20*TK10E20
+    missedK10M20*TK10M20
+    missedE11K21*TE11K21
+    missedM11K21*TM11K21
+    missedM11K10*TM11K10];
 
+
+names =  {'C10K20'
+    'K11C21'
+    'K11C10'
+    'K10E20'
+    'K10M20'
+    'E11K21'
+    'M11K21'
+    'M11K10'};
+
+bar(barplot);
+set(gca,'xticklabel',names);
+title('people missed transfers');
 %%
 
 
