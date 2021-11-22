@@ -4,7 +4,7 @@ function [] = basis
 %version 2: Lindo result
 v=2;
 
-lindoRes = transformLindoData('originalResults.txt');
+lindoRes = transformLindoData('lindoResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
 STK1AL	=	lindoRes.STK1AL	;
 STE1AA	=	lindoRes.STE1AA	;
@@ -636,7 +636,7 @@ totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers 
 
 
 %% Plotting all the information about delays and missed transfers
-
+close all
 %Missed transfers
 
 figure
@@ -707,8 +707,8 @@ barplot2 = [delayC10*((ARC10Ha + TC10K20))
 bar(barplot2);
 set(gca,'xticklabel', names2);
 title('people trains with delay');
-
-%mean of min delays
+        
+% %mean of min delays
 subplot(3,1,3);
 barplot3 = [mean(delayArrayK10)
     mean(delayArrayE11)
