@@ -4,7 +4,7 @@ function [] = basis
 %version 2: Lindo result
 v=2;
 
-lindoRes = transformLindoData('lindoResults.txt');
+lindoRes = transformLindoData('originalResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
 STK1AL	=	lindoRes.STK1AL	;
 STE1AA	=	lindoRes.STE1AA	;
@@ -334,6 +334,10 @@ delayK11 = 0;
 delayM11 = 0;
 
 delayArrayK10 = zeros(0,0);
+delayArrayE11 = zeros(0,0);
+delayArrayC10 = zeros(0,0);
+delayArrayK11 = zeros(0,0);
+delayArrayM11 = zeros(0,0);
 
 for i=1:1:a
     %determine the real arriving times
@@ -355,6 +359,7 @@ for i=1:1:a
     if ac10ha>AC10Ha(v)							%we have a delay
         delayC10 = delayC10 + 1;
         mc10=(ac10ha-AC10Ha(v));					%minutes of delay
+        delayArrayC10 = [delayArrayC10 mc10];
         pc10=mc10*ARC10Ha*WLA;					%cost of this delay
         pzc10=0;									%cost of arriving early
         if ac10ha-AC10Ha(v)>too_late
@@ -373,6 +378,7 @@ for i=1:1:a
     if ae11le>AE11Le(v)
         delayE11 = delayE11 + 1;
         me11=(ae11le-AE11Le(v));
+        delayArrayE11 = [delayArrayE11 me11];
         pe11=me11*ARE11Le*WLA;
         pze11=0;
         if ae11le-AE11Le(v)>too_late
@@ -410,6 +416,7 @@ for i=1:1:a
     if ak11ha>AK11Ha(v)								%we have a delay
         delayK11 = delayK11 + 1;
         mk11=(ak11ha-AK11Ha(v));					%minutes of delay
+        delayArrayK11 = [delayArrayK11 mk11];
         pk11=mk11*ARK11Ha*WLA;					%cost of this delay
         pzk11=0;
         if ak11ha-AK11Ha(v)>too_late
@@ -428,6 +435,7 @@ for i=1:1:a
     if am11le>AM11Le(v);								%we have a delay
         delayM11 = delayM11 + 1;
         mm11=(am11le-AM11Le(v));					%minutes of delay
+        delayArrayM11 = [delayArrayM11 mm11];
         pm11=mm11*ARM11Le*WLA;					%cost of this delay
         pzm11=0;
         if am11le-AM11Le(v)>too_late;
@@ -630,7 +638,7 @@ totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers 
 %% Plotting all the information about delays and missed transfers
 
 %Missed transfers
-close all
+
 figure
 subplot(2,1,1);
 barplot = [missedC10K20/(a/100)
@@ -673,7 +681,7 @@ title('people missed transfers');
 
 %Delay on trains
 figure
-subplot(2,1,1); 
+subplot(3,1,1); 
 barplot2 = [delayC10/(a/100)
             delayE11/(a/100)
             delayK10/(a/100)
@@ -689,9 +697,9 @@ set(gca,'xticklabel', names2);
 title('percentage trains with delay');
 
 %people delay on trains
-subplot(2,1,2); 
+subplot(3,1,2); 
 barplot2 = [delayC10*((ARC10Ha + TC10K20))
-            delayE11*(ARM11Le + TE11K21)
+            delayE11*(ARE11Le + TE11K21)
             delayK10*(ARK10Le + TK10E20 + TK10M20)
             delayK11*(ARK11Ha + TK11C10 + TK11C21)
             delayM11*(ARM11Le + TM11K21 + TM11K10)];
@@ -699,6 +707,18 @@ barplot2 = [delayC10*((ARC10Ha + TC10K20))
 bar(barplot2);
 set(gca,'xticklabel', names2);
 title('people trains with delay');
+
+%mean of min delays
+subplot(3,1,3);
+barplot3 = [mean(delayArrayK10)
+    mean(delayArrayE11)
+    mean(delayArrayC10)
+    mean(delayArrayK11)
+    mean(delayArrayM11) ];
+
+bar(barplot3);
+set(gca, 'xticklabel', names2);
+title('mean of minutes delay for each train');
 
 %%
 
