@@ -1,0 +1,38 @@
+percentage_missed =
+
+    4.8137
+
+
+percentage_long =
+
+    4.8137
+
+
+stopping_cost =
+
+   1.3088e+04
+
+
+total_cost_arriving_late =
+
+   1.1226e+05
+
+
+total_delay =
+
+    4.7756
+
+
+total_cost_through_passengers =
+
+   1.0186e+05
+
+
+total_cost_of_transfers =
+
+   5.4720e+05
+
+
+totale_kost =
+
+   7.7441e+05
