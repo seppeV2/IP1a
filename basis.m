@@ -318,6 +318,9 @@ a=500000;
 too_late=3;
 %long_transfer_time if passengers have to wait more than "WA" minutes
 WA=20;
+
+%variables added to make plots at the end of this file
+%amount of missed transfers
 missedC10K20 = 0;
 missedK11C21 = 0;
 missedK11C10 = 0;
@@ -327,12 +330,14 @@ missedE11K21 = 0;
 missedM11K21 = 0;
 missedM11K10 = 0;
 
+%amount of trains with delay
 delayC10 = 0;
 delayE11 = 0;
 delayK10 = 0;
 delayK11 = 0;
 delayM11 = 0;
 
+%aray with the amount of minutes per delay
 delayArrayK10 = zeros(0,0);
 delayArrayE11 = zeros(0,0);
 delayArrayC10 = zeros(0,0);
@@ -737,6 +742,7 @@ bar(barplot3);
 set(gca, 'xticklabel', names2);
 title('mean of minutes delay for each train');
 
+close all
 %%
 
 
