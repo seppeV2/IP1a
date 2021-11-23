@@ -640,7 +640,7 @@ close all
 %Missed transfers
 
 figure
-subplot(2,1,1);
+subplot(3,1,1);
 barplot = [missedC10K20/(a/100)
     missedK11C21/(a/100)
     missedK11C10/(a/100)
@@ -663,16 +663,32 @@ bar(barplot);
 set(gca,'xticklabel',names);
 title('percentage missed transfers');
         
-%people missed transfer
-subplot(2,1,2);
-barplot = [missedC10K20*TC10K20
-    missedK11C21*TK11C21
-    missedK11C10*TK11C10
-    missedK10E20*TK10E20
-    missedK10M20*TK10M20
-    missedE11K21*TE11K21
-    missedM11K21*TM11K21
-    missedM11K10*TM11K10];
+%people missed transfer compare 
+subplot(3,1,2);
+barplot = [missedC10K20/a*TC10K20 (1-missedC10K20/a)*TC10K20;
+    missedK11C21/a*TK11C21 (1-missedK11C21/a)*TK11C21;
+    missedK11C10/a*TK11C10 (1-missedK11C10/a)*TK11C10;
+    missedK10E20/a*TK10E20 (1-missedK10E20/a)*TK10E20;
+    missedK10M20/a*TK10M20 (1-missedK10M20/a)*TK10M20;
+    missedE11K21/a*TE11K21 (1-missedE11K21/a)*TE11K21;
+    missedM11K21/a*TM11K21 (1-missedM11K21/a)*TM11K21;
+    missedM11K10/a*TM11K10 (1-missedM11K10/a)*TM11K10];
+
+
+bar(barplot);
+set(gca,'xticklabel',names);
+title('compare people missed transfers with people who didn''t miss transfer');
+legend('People missed transfer', 'People who didn''t miss transfer');
+%people missed transfer compare 
+subplot(3,1,3);
+barplot = [missedC10K20/a*TC10K20
+    missedK11C21/a*TK11C21
+    missedK11C10/a*TK11C10 
+    missedK10E20/a*TK10E20 
+    missedK10M20/a*TK10M20 
+    missedE11K21/a*TE11K21
+    missedM11K21/a*TM11K21 
+    missedM11K10/a*TM11K10];
 
 
 bar(barplot);
@@ -698,16 +714,17 @@ title('percentage trains with delay');
 
 %people delay on trains
 subplot(3,1,2); 
-barplot2 = [delayC10*((ARC10Ha + TC10K20))
-            delayE11*(ARE11Le + TE11K21)
-            delayK10*(ARK10Le + TK10E20 + TK10M20)
-            delayK11*(ARK11Ha + TK11C10 + TK11C21)
-            delayM11*(ARM11Le + TM11K21 + TM11K10)];
-        
+barplot2 = [delayC10/a*((ARC10Ha)) (1-delayC10/a)*((ARC10Ha)) THC10Ha;
+            delayE11/a*(ARE11Le) (1-delayE11/a)*(ARE11Le) THE11Le;
+            delayK10/a*(ARK10Le) (1-delayK10/a)*(ARK10Le) THK10Le;
+            delayK11/a*(ARK11Ha) (1-delayK11/a)*(ARK11Ha) THK11Ha;
+            delayM11/a*(ARM11Le) (1-delayM11/a)*(ARM11Le) THM11Le];
+
 bar(barplot2);
 set(gca,'xticklabel', names2);
 title('people trains with delay');
-        
+legend('People with delay', 'People without delay', 'through passengers');
+
 % %mean of min delays
 subplot(3,1,3);
 barplot3 = [mean(delayArrayK10)
