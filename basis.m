@@ -344,6 +344,13 @@ delayArrayC10 = zeros(0,0);
 delayArrayK11 = zeros(0,0);
 delayArrayM11 = zeros(0,0);
 
+%array with amount of cost early arrival 
+costTHC10 = zeros(0,0);
+costTHE11 = zeros(0,0);
+costTHK11 = zeros(0,0);
+costTHK10 = zeros(0,0);
+costTHM11 = zeros(0,0);
+
 for i=1:1:a
     %determine the real arriving times
     %these are compared later with the scheduled arrival times
@@ -377,6 +384,7 @@ for i=1:1:a
         mc10=0;
         pc10=0;
         pzc10=(AC10Ha(v)-ac10ha)*THC10Ha*WST;     %cost of arriving early
+        costTHC10 = [costTHC10 pzc10];
     end
     
     %E11
@@ -396,6 +404,7 @@ for i=1:1:a
         me11=0;
         pe11=0;
         pze11=(AE11Le(v)-ae11le)*THE11Le*WST;
+        costTHE11 = [costTHE11 pze11];
     end
     
     %K10
@@ -415,6 +424,7 @@ for i=1:1:a
         mk10=0;
         pk10=0;
         pzk10=(AK10Le(v)-ak10le)*THK10Le*WST;
+        costTHK10 = [costTHK10 pzk10];
     end
     
     %K11
@@ -434,6 +444,7 @@ for i=1:1:a
         mk11=0;
         pk11=0;
         pzk11=(AK11Ha(v)-ak11ha)*THK11Ha*WST;
+        costTHK11 = [costTHK11 pzk11];
     end
     
     %M11
@@ -453,12 +464,18 @@ for i=1:1:a
         mm11=0;
         pm11=0;
         pzm11=(AM11Le(v)-am11le)*THM11Le*WST;
+        costTHM11 = [costTHM11 pzm11];
     end
     
     passengers_arriving_late(i)=uc10+ue11+uk11+uk10+um11;
     delay(i)=mc10+me11+mk11+mk10+mm11;
     cost_arriving_late(i)=pc10+pe11+pk11+pk10+pm11;
     cost_through_passengers(i)=pzc10+pze11+pzk11+pzk10+pzm11;
+    
+   
+    
+    
+    
     
     %transfers
     
@@ -741,6 +758,36 @@ barplot3 = [mean(delayArrayK10)
 bar(barplot3);
 set(gca, 'xticklabel', names2);
 title('mean of minutes delay for each train');
+
+figure
+subplot(2,1,1);
+barplot7 = [length(costTHC10)
+    length(costTHE11)
+    length(costTHK10)
+    length(costTHK11)
+    length(costTHM11)
+    ];
+
+names3 = {'costEarlyC10'
+            'costEarlyE11'
+            'costEarlyK10'
+            'costEarlyK11'
+            'costEarlyM11'};
+bar(barplot7);
+set(gca, 'xticklabel', names3);
+title('amount of trains with cost bc of early arrival (through train costs)');
+
+subplot(2,1,2);
+barplot8 = [mean(costTHC10)
+    mean(costTHE11)
+    mean(costTHK10)
+    mean(costTHK11)
+    mean(costTHM11)
+    ];
+
+bar(barplot8);
+set(gca, 'xticklabel', names3);
+title('mean of cost early arrival');
 
 %%
 
