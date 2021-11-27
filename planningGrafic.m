@@ -3,7 +3,7 @@ function  [allRoutes,timing] = planningGrafic()
 
 
 %% This section makes a struct with all the necessary data for the graph
-lindoRes = transformLindoData('originalResults.txt'); %load the struct in
+lindoRes = transformLindoData('lindoResults.txt'); %load the struct in
 
 values = struct2cell(lindoRes); %get all the value's out of the struct
 
@@ -75,25 +75,25 @@ for i=1:length(trains)
         
         actions = fieldnames(timing.(trains{i}).(stations{j}));
         
-        
-        if (length(actions) == 2)
-            if actions{1}(1) == 'S' && actions{2}(1) == 'D'
-                times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{2})]];
-                times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{2})-timing.(trains{i}).(stations{j}).(actions{1}))]];
-                
-            elseif actions{1}(1) == 'D' && actions{2}(1) == 'S'
-                times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{1})]];
-                times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{1})-timing.(trains{i}).(stations{j}).(actions{2}))]];
-                
-            elseif actions{1}(1) == 'A' && actions{2}(1) == 'S'
-                times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{1})]];
-                times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{1})+timing.(trains{i}).(stations{j}).(actions{2}))]];
-                
-            elseif actions{1}(1) == 'S' && actions{2}(1) == 'A'
-                times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{2})]];
-                times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{2})+timing.(trains{i}).(stations{j}).(actions{1}))]];
-                
-                
+        if (length(actions) == 2 )
+            if (~contains(actions{1} ,'2') && ~contains(actions{2} ,'2')) %so no 2 trains are plotted!
+                if actions{1}(1) == 'S' && actions{2}(1) == 'D'
+                    times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{2})]];
+                    times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{2})-timing.(trains{i}).(stations{j}).(actions{1}))]];
+                    
+                elseif actions{1}(1) == 'D' && actions{2}(1) == 'S'
+                    times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{1})]];
+                    times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{1})-timing.(trains{i}).(stations{j}).(actions{2}))]];
+                    
+                elseif actions{1}(1) == 'A' && actions{2}(1) == 'S'
+                    times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{1})]];
+                    times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{1})+timing.(trains{i}).(stations{j}).(actions{2}))]];
+                    
+                elseif actions{1}(1) == 'S' && actions{2}(1) == 'A'
+                    times = [times ; [stationID.(stations{j}), timing.(trains{i}).(stations{j}).(actions{2})]];
+                    times = [times ; [stationID.(stations{j}), (timing.(trains{i}).(stations{j}).(actions{2})+timing.(trains{i}).(stations{j}).(actions{1}))]];
+                    
+                end
             end
             
             %some stations of the second train don't have a D-time or an
@@ -195,7 +195,7 @@ for j=1:length(tracks)
             %start to plot
             %make a new table with value's under 60 (and two plots to make
             %it all within an hour)
-            disp(trains{i});
+            
             if (allRoutes.(trains{i})(1,2) >= 60)
                 allRoutes.(trains{i})(:,2) = allRoutes.(trains{i})(:,2) - 60;
                 stops = length(allRoutes.(trains{i}));
@@ -205,7 +205,7 @@ for j=1:length(tracks)
                 text(allRoutes.(trains{i})( stops ,2),allRoutes.(trains{i})(stops ,1), 'A' , 'FontSize', 15);
                 string = ['track '  tracks(j)];
                 title(string);
-                disp(allRoutes.(trains{i}));
+              
                 
                 
             else
@@ -221,8 +221,7 @@ for j=1:length(tracks)
                         subTimesChange(:,2) = subTimesChange(:,2) - 60;
                         subTimesChange = [y60 0;subTimesChange];
                         
-                        disp(subTimesNorm);
-                        disp(subTimesChange);
+                       
                         
                         plot(subTimesNorm(:,2), subTimesNorm(:,1), '-*','HandleVisibility','off',...
                             'Color',colors{count}, 'LineWidth',2.5);
@@ -260,6 +259,6 @@ for j=1:length(tracks)
     legend('FontSize',12);
     
 end
-close all
+
 end
 

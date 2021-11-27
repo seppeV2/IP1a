@@ -742,7 +742,6 @@ bar(barplot3);
 set(gca, 'xticklabel', names2);
 title('mean of minutes delay for each train');
 
-close all
 %%
 
 
