@@ -715,7 +715,7 @@ barplot = [missedC10K20/a*TC10K20
 
 bar(barplot);
 set(gca,'xticklabel',names);
-title('people missed transfers');
+%title('people missed transfers');
 
 %Delay on trains
 figure
