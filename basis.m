@@ -4,102 +4,98 @@ function [] = basis
 %version 2: Lindo result
 v=2;
 
-lindoRes = transformLindoData('lindoResults.txt');
-%HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
-STK1AL	=	lindoRes.STK1AL	;
-STE1AA	=	lindoRes.STE1AA	;
-STM1AA	=	lindoRes.STM1AA	;
-DC10HE	=	lindoRes.DC10HE	;
-DK10AL	=	lindoRes.DK10AL;
-AK11HA	=	lindoRes.AK11HA	;
-TOTCOST	=	lindoRes.TOTCOST;
-TTMIN	=	lindoRes.TTMIN	;
-TTK11C21	=	lindoRes.TTK11C21	;
-TTK11C10	=	lindoRes.TTK11C10	;
-TTC10K20	=	lindoRes.TTC10K20	;
-TTK10E20	=	lindoRes.TTK10E20	;
-TTK10M20	=	lindoRes.TTK10M20	;
-TTE11K21	=	lindoRes.TTE11K21	;
-TTM11K21	=	lindoRes.TTM11K21	;
-TTM11K10	=	lindoRes.TTM11K10	;
-IBK1C1	=	lindoRes.IBK1C1	;
-IBK1C0	=	lindoRes.IBK1C0	;
-IBC0K0	=	lindoRes.IBC0K0	;
-IBK0E0	=	lindoRes.IBK0E0	;
-IBK0M0	=	lindoRes.IBK0M0	;
-IBE1K1	=	lindoRes.IBE1K1	;
-IBM1K1	=	lindoRes.IBM1K1	;
-IBM1K0	=	lindoRes.IBM1K0	;
-STC0AA	=	lindoRes.STC0AA	;
-DC10AA	=	lindoRes.DC10AA	;
-BC0AAHA	=	lindoRes.BC0AAHA;
-AC10HA	=	lindoRes.AC10HA	;
-DC11HA	=	lindoRes.DC11HA	;
-STC1AA	=	lindoRes.STC1AA	;
-DC11AA	=	lindoRes.DC11AA	;
-AC11HE	=	lindoRes.AC11HE	;
-DE10LE	=	lindoRes.DE10LE	;
-STE0AA	=	lindoRes.STE0AA	;
-DE10AA	=	lindoRes.DE10AA	;
-AE10HA	=	lindoRes.AE10HA	;
-DE11HA	=	lindoRes.DE11HA	;
-DE11AA	=	lindoRes.DE11AA	;
-BE1AALE	=	lindoRes.BE1AALE;
-AE11LE	=	lindoRes.AE11LE	;
-DK10HA	=	lindoRes.DK10HA	;
-STK0AL	=	lindoRes.STK0AL	;
-STK0ST	=	lindoRes.STK0ST	;
-DK10ST	=	lindoRes.DK10ST	;
-STK0LA	=	lindoRes.STK0LA	;
-DK10LA	=	lindoRes.DK10LA	;
-BK0LALE	=	lindoRes.BK0LALE	;
-AK10LE	=	lindoRes.AK10LE	;
-DK11LE	=	lindoRes.DK11LE	;
-STK1LA	=	lindoRes.STK1LA	;
-DK11LA	=	lindoRes.DK11LA	;
-STK1ST	=	lindoRes.STK1ST	;
-DK11ST	=	lindoRes.DK11ST	;
-DK11AL	=	lindoRes.DK11AL	;
-BK1ALHA	=	lindoRes.BK1ALHA	;
-DM10LE	=	lindoRes.DM10LE	;
-STM0AA	=	lindoRes.STM0AA	;
-DM10AA	=	lindoRes.DM10AA	;
-AM10HE	=	lindoRes.AM10HE	;
-DM11HE	=	lindoRes.DM11HE	;
-DM11AA	=	lindoRes.DM11AA	;
-BM1LEAA	=	lindoRes.BM1LEAA	;
-AM11LE	=	lindoRes.AM11LE	;
-STM1LE	=	lindoRes.STM1LE	;
-DM20LE	=	lindoRes.DM20LE	;
-DK20HA	=	lindoRes.DK20HA	;
-DK21LE	=	lindoRes.DK21LE	;
-DE20LE	=	lindoRes.DE20LE	;
-STC0HA	=	lindoRes.STC0HA	;
-DC21HA	=	lindoRes.DC21HA	;
-STK0LE	=	lindoRes.STK0LE	;
-UC0K0P	=	lindoRes.UC0K0P	;
-UC0K0N	=	lindoRes.UC0K0N	;
-UE1K1P	=	lindoRes.UE1K1P	;
-UE1K1N	=	lindoRes.UE1K1N	;
-UK0E0P	=	lindoRes.UK0E0P	;
-UK0E0N	=	lindoRes.UK0E0N	;
-UK1C0P	=	lindoRes.UK1C0P	;
-UK1C0N	=	lindoRes.UK1C0N	;
-UK1C1P	=	lindoRes.UK1C1P	;
-UK1C1N	=	lindoRes.UK1C1N	;
-UK0M0P	=	lindoRes.UK0M0P	;
-UK0M0N	=	lindoRes.UK0M0N	;
-UM1K0P	=	lindoRes.UM1K0P	;
-UM1K0N	=	lindoRes.UM1K0N	;
-UM1K1P	=	lindoRes.UM1K1P	;
-UM1K1N	=	lindoRes.UM1K1N	;
-DK20AL	=	lindoRes.DK20AL	;
-DK20ST	=	lindoRes.DK20ST	;
-TTCOST	=	lindoRes.TTCOST	;
-STCOST	=	lindoRes.STCOST	;
-DEVIAT	=	lindoRes.DEVIAT	;
-
-
+STK1AL = 1.000000;
+STE1AA = 1.000000;
+STM1AA = 1.000000;
+DC10HE = 60.000000;
+DK10AL = 50.000000;
+AK11HA = 103.000000;
+TOTCOST = 49.436001;
+TTMIN = 3.000000;
+TTK11C21 = 3.000000;
+TTK11C10 = 4.000000;
+TTC10K20 = 3.000000;
+TTK10E20 = 5.000000;
+TTK10M20 = 5.000000;
+TTE11K21 = 12.000000;
+TTM11K21 = 6.000000;
+TTM11K10 = 5.000000;
+IBK1C1 = 5.000000;
+IBK1C0 = 9.000000;
+IBC0K0 = 4.000000;
+IBK0E0 = 2.000000;
+IBK0M0 = 2.000000;
+IBE1K1 = 2.000000;
+IBM1K1 = 7.000000;
+IBM1K0 = 10.000000;
+STC0AA = 1.000000;
+DC10AA = 70.000000;
+BC0AAHA = 4.000000;
+AC10HA = 100.000000;
+DC11HA = 46.000000;
+STC1AA = 1.000000;
+DC11AA = 73.000000;
+AC11HE = 82.000000;
+DE10LE = 43.000000;
+STE0AA = 1.000000;
+DE10AA = 56.000000;
+AE10HA = 81.000000;
+DE11HA = 48.000000;
+DE11AA = 74.000000;
+BE1AALE = 2.000000;
+AE11LE = 88.000000;
+DK10HA = 43.000000;
+STK0AL = 1.000000;
+STK0ST = 1.000000;
+DK10ST = 59.000000;
+STK0LA = 1.000000;
+DK10LA = 69.000000;
+BK0LALE = 2.000000;
+AK10LE = 98.000000;
+DK11LE = 40.000000;
+STK1LA = 1.000000;
+DK11LA = 68.000000;
+STK1ST = 1.000000;
+DK11ST = 78.000000;
+DK11AL = 87.000000;
+BK1ALHA = 10.000000;
+DM10LE = 43.000000;
+STM0AA = 1.000000;
+DM10AA = 58.000000;
+AM10HE = 70.000000;
+DM11HE = 55.000000;
+DM11AA = 68.000000;
+BM1LEAA = 12.000000;
+AM11LE = 94.000000;
+STM1LE = 9.000000;
+DM20LE = 103.000000;
+DK20HA = 103.000000;
+DK21LE = 100.000000;
+DE20LE = 103.000000;
+STC0HA = 7.000000;
+DC21HA = 106.000000;
+STK0LE = 1.000000;
+UC0K0P = 0.000000;
+UC0K0N = 0.000000;
+UE1K1P = 0.000000;
+UE1K1N = 0.000000;
+UK0E0P = 0.000000;
+UK0E0N = 0.000000;
+UK1C0P = 1.000000;
+UK1C0N = 0.000000;
+UK1C1P = 5.000000;
+UK1C1N = 0.000000;
+UK0M0P = 0.000000;
+UK0M0N = 0.000000;
+UM1K0P = 2.000000;
+UM1K0N = 0.000000;
+UM1K1P = 5.000000;
+UM1K1N = 0.000000;
+DK20AL = 110.000000;
+DK20ST = 119.000000;
+TTCOST = 8.556000;
+STCOST = 20.879999;
+DEVIAT = 20.000000
 
 TT=3; %"necessary" transfer time is 3 minutes
 
@@ -318,6 +314,9 @@ a=500000;
 too_late=3;
 %long_transfer_time if passengers have to wait more than "WA" minutes
 WA=20;
+
+%variables added to make plots at the end of this file
+%amount of missed transfers
 missedC10K20 = 0;
 missedK11C21 = 0;
 missedK11C10 = 0;
@@ -327,13 +326,26 @@ missedE11K21 = 0;
 missedM11K21 = 0;
 missedM11K10 = 0;
 
+%amount of trains with delay
 delayC10 = 0;
 delayE11 = 0;
 delayK10 = 0;
 delayK11 = 0;
 delayM11 = 0;
 
+%aray with the amount of minutes per delay
 delayArrayK10 = zeros(0,0);
+delayArrayE11 = zeros(0,0);
+delayArrayC10 = zeros(0,0);
+delayArrayK11 = zeros(0,0);
+delayArrayM11 = zeros(0,0);
+
+%array with amount of cost early arrival 
+costTHC10 = zeros(0,0);
+costTHE11 = zeros(0,0);
+costTHK11 = zeros(0,0);
+costTHK10 = zeros(0,0);
+costTHM11 = zeros(0,0);
 
 for i=1:1:a
     %determine the real arriving times
@@ -355,6 +367,7 @@ for i=1:1:a
     if ac10ha>AC10Ha(v)							%we have a delay
         delayC10 = delayC10 + 1;
         mc10=(ac10ha-AC10Ha(v));					%minutes of delay
+        delayArrayC10 = [delayArrayC10 mc10];
         pc10=mc10*ARC10Ha*WLA;					%cost of this delay
         pzc10=0;									%cost of arriving early
         if ac10ha-AC10Ha(v)>too_late
@@ -367,12 +380,14 @@ for i=1:1:a
         mc10=0;
         pc10=0;
         pzc10=(AC10Ha(v)-ac10ha)*THC10Ha*WST;     %cost of arriving early
+        costTHC10 = [costTHC10 pzc10];
     end
     
     %E11
     if ae11le>AE11Le(v)
         delayE11 = delayE11 + 1;
         me11=(ae11le-AE11Le(v));
+        delayArrayE11 = [delayArrayE11 me11];
         pe11=me11*ARE11Le*WLA;
         pze11=0;
         if ae11le-AE11Le(v)>too_late
@@ -385,6 +400,7 @@ for i=1:1:a
         me11=0;
         pe11=0;
         pze11=(AE11Le(v)-ae11le)*THE11Le*WST;
+        costTHE11 = [costTHE11 pze11];
     end
     
     %K10
@@ -404,12 +420,14 @@ for i=1:1:a
         mk10=0;
         pk10=0;
         pzk10=(AK10Le(v)-ak10le)*THK10Le*WST;
+        costTHK10 = [costTHK10 pzk10];
     end
     
     %K11
     if ak11ha>AK11Ha(v)								%we have a delay
         delayK11 = delayK11 + 1;
         mk11=(ak11ha-AK11Ha(v));					%minutes of delay
+        delayArrayK11 = [delayArrayK11 mk11];
         pk11=mk11*ARK11Ha*WLA;					%cost of this delay
         pzk11=0;
         if ak11ha-AK11Ha(v)>too_late
@@ -422,12 +440,14 @@ for i=1:1:a
         mk11=0;
         pk11=0;
         pzk11=(AK11Ha(v)-ak11ha)*THK11Ha*WST;
+        costTHK11 = [costTHK11 pzk11];
     end
     
     %M11
     if am11le>AM11Le(v);								%we have a delay
         delayM11 = delayM11 + 1;
         mm11=(am11le-AM11Le(v));					%minutes of delay
+        delayArrayM11 = [delayArrayM11 mm11];
         pm11=mm11*ARM11Le*WLA;					%cost of this delay
         pzm11=0;
         if am11le-AM11Le(v)>too_late;
@@ -440,12 +460,18 @@ for i=1:1:a
         mm11=0;
         pm11=0;
         pzm11=(AM11Le(v)-am11le)*THM11Le*WST;
+        costTHM11 = [costTHM11 pzm11];
     end
     
     passengers_arriving_late(i)=uc10+ue11+uk11+uk10+um11;
     delay(i)=mc10+me11+mk11+mk10+mm11;
     cost_arriving_late(i)=pc10+pe11+pk11+pk10+pm11;
     cost_through_passengers(i)=pzc10+pze11+pzk11+pzk10+pzm11;
+    
+   
+    
+    
+    
     
     %transfers
     
@@ -628,11 +654,11 @@ totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers 
 
 
 %% Plotting all the information about delays and missed transfers
-
-%Missed transfers
 close all
+%Missed transfers
+
 figure
-subplot(2,1,1);
+subplot(3,1,1);
 barplot = [missedC10K20/(a/100)
     missedK11C21/(a/100)
     missedK11C10/(a/100)
@@ -653,36 +679,43 @@ names =  {'C10K20'
 
 bar(barplot);
 set(gca,'xticklabel',names);
-title('percentage missed transfers');
+title('Missed transfers (%)');
         
-%people missed transfer
-subplot(2,1,2);
-barplot = [missedC10K20*TC10K20
-    missedK11C21*TK11C21
-    missedK11C10*TK11C10
-    missedK10E20*TK10E20
-    missedK10M20*TK10M20
-    missedE11K21*TE11K21
-    missedM11K21*TM11K21
-    missedM11K10*TM11K10];
+%people missed transfer compare 
+subplot(3,1,2);
+barplot = [missedC10K20/a*TC10K20 (1-missedC10K20/a)*TC10K20;
+    missedK11C21/a*TK11C21 (1-missedK11C21/a)*TK11C21;
+    missedK11C10/a*TK11C10 (1-missedK11C10/a)*TK11C10;
+    missedK10E20/a*TK10E20 (1-missedK10E20/a)*TK10E20;
+    missedK10M20/a*TK10M20 (1-missedK10M20/a)*TK10M20;
+    missedE11K21/a*TE11K21 (1-missedE11K21/a)*TE11K21;
+    missedM11K21/a*TM11K21 (1-missedM11K21/a)*TM11K21;
+    missedM11K10/a*TM11K10 (1-missedM11K10/a)*TM11K10];
 
-
-names =  {'C10K20'
-    'K11C21'
-    'K11C10'
-    'K10E20'
-    'K10M20'
-    'E11K21'
-    'M11K21'
-    'M11K10'};
 
 bar(barplot);
 set(gca,'xticklabel',names);
-title('people missed transfers');
+title('Number of missed transfers vs Number of successful transfers');
+legend('Missed transfer', 'Successful transfer');
+%people missed transfer compare 
+subplot(3,1,3);
+barplot = [missedC10K20/a*TC10K20
+    missedK11C21/a*TK11C21
+    missedK11C10/a*TK11C10 
+    missedK10E20/a*TK10E20 
+    missedK10M20/a*TK10M20 
+    missedE11K21/a*TE11K21
+    missedM11K21/a*TM11K21 
+    missedM11K10/a*TM11K10];
+
+
+bar(barplot);
+set(gca,'xticklabel',names);
+title('Number of missed transfers');
 
 %Delay on trains
 figure
-subplot(2,1,1); 
+subplot(3,1,1); 
 barplot2 = [delayC10/(a/100)
             delayE11/(a/100)
             delayK10/(a/100)
@@ -698,26 +731,58 @@ set(gca,'xticklabel', names2);
 title('percentage trains with delay');
 
 %people delay on trains
-subplot(2,1,2); 
-barplot2 = [delayC10*((ARC10Ha + TC10K20))
-            delayE11*(ARM11Le + TE11K21)
-            delayK10*(ARK10Le + TK10E20 + TK10M20)
-            delayK11*(ARK11Ha + TK11C10 + TK11C21)
-            delayM11*(ARM11Le + TM11K21 + TM11K10)];
-        
-names2 = {'delayC10'
-            'delayE11'
-            'delayK10'
-            'delayK11'
-            'delayM11'};
+subplot(3,1,2); 
+barplot2 = [delayC10/a*((ARC10Ha)) (1-delayC10/a)*((ARC10Ha)) THC10Ha;
+            delayE11/a*(ARE11Le) (1-delayE11/a)*(ARE11Le) THE11Le;
+            delayK10/a*(ARK10Le) (1-delayK10/a)*(ARK10Le) THK10Le;
+            delayK11/a*(ARK11Ha) (1-delayK11/a)*(ARK11Ha) THK11Ha;
+            delayM11/a*(ARM11Le) (1-delayM11/a)*(ARM11Le) THM11Le];
+
 bar(barplot2);
 set(gca,'xticklabel', names2);
 title('people trains with delay');
+legend('People with delay', 'People without delay', 'through passengers');
 
-figure 
-plot(delayArrayK10, '*');
-title('Delay on K10 train');
+% %mean of min delays
+subplot(3,1,3);
+barplot3 = [mean(delayArrayK10)
+    mean(delayArrayE11)
+    mean(delayArrayC10)
+    mean(delayArrayK11)
+    mean(delayArrayM11) ];
+
+bar(barplot3);
+set(gca, 'xticklabel', names2);
+title('mean of minutes delay for each train');
+
+figure
+subplot(2,1,1);
+barplot7 = [length(costTHC10)
+    length(costTHE11)
+    length(costTHK10)
+    length(costTHK11)
+    length(costTHM11)
+    ];
+
+names3 = {'costEarlyC10'
+            'costEarlyE11'
+            'costEarlyK10'
+            'costEarlyK11'
+            'costEarlyM11'};
+bar(barplot7);
+set(gca, 'xticklabel', names3);
+title('amount of trains with cost bc of early arrival (through train costs)');
+
+subplot(2,1,2);
+barplot8 = [mean(costTHC10)
+    mean(costTHE11)
+    mean(costTHK10)
+    mean(costTHK11)
+    mean(costTHM11)
+    ];
+
+bar(barplot8);
+set(gca, 'xticklabel', names3);
+title('mean of cost early arrival');
 
 %%
-
-

@@ -19,7 +19,7 @@ TTK11C10-TTMIN>0
 TTC10K20-TTMIN>0
 TTK10E20-TTMIN>2
 TTK10M20-TTMIN>2 
-TTE11K21-TTMIN>0
+TTE11K21-TTMIN>9
 TTM11K21-TTMIN>0
 TTM11K10-TTMIN>2
 
@@ -82,7 +82,7 @@ DK11La+STK1St -DK11St=-9
 DK11St+STK1Al -DK11Al=-8
 DK11Al+BK1AlHa -AK11Ha=-6
 
-BK1AlHa > 10
+BK1AlHa > 10 	!extra constrain so the buffer time is longer than ideal (to reduce the missed transfers)
 
 AK11Ha<120
 STK1Al>1
@@ -100,7 +100,7 @@ DM11He<60
 DM11He+STM1Aa -DM11Aa=-12
 DM11Aa+BM1LeAa -AM11Le=-14
 
-BM1LeAa > 12 
+BM1LeAa > 12 	!extra constrain so the buffer time is longer than ideal (to reduce the missed transfers)
 
 !variation of these don't work
 !BE1AALE >4
@@ -211,8 +211,8 @@ DE20Le-DE10Le=60
 !AE31Le-AE21Le=60
 !K20
 DK20Ha-DK10Ha=60
-!DK20Al-DK10Al=60
-!DK20St-DK10St=60
+DK20Al-DK10Al=60
+DK20St-DK10St=60
 !DK20La-DK10La=60
 !AK20Le-AK10Le=60
 !K30
@@ -261,4 +261,7 @@ Gin STM1Aa
 Gin DC10He
 Gin DK10Al
 Gin AK11Ha
+
+
+
 
