@@ -4,7 +4,7 @@ function [] = basis
 %version 2: Lindo result
 v=2;
 
-lindoRes = transformLindoData('lindoResults.txt');
+lindoRes = transformLindoData('originalResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
 STK1AL	=	lindoRes.STK1AL	;
 STE1AA	=	lindoRes.STE1AA	;
@@ -683,7 +683,7 @@ names =  {'C10K20'
 
 bar(barplot);
 set(gca,'xticklabel',names);
-title('percentage missed transfers');
+%title('percentage missed transfers');
         
 %people missed transfer compare 
 subplot(3,1,2);
@@ -699,7 +699,7 @@ barplot = [missedC10K20/a*TC10K20 (1-missedC10K20/a)*TC10K20;
 
 bar(barplot);
 set(gca,'xticklabel',names);
-title('compare people missed transfers with people who didn''t miss transfer');
+%title('compare people missed transfers with people who didn''t miss transfer');
 legend('People missed transfer', 'People who didn''t miss transfer');
 %people missed transfer compare 
 subplot(3,1,3);
@@ -732,7 +732,7 @@ names2 = {'delayC10'
             'delayM11'};
 bar(barplot2);
 set(gca,'xticklabel', names2);
-title('percentage trains with delay');
+%title('percentage trains with delay');
 
 %people delay on trains
 subplot(3,1,2); 
@@ -744,7 +744,7 @@ barplot2 = [delayC10/a*((ARC10Ha)) (1-delayC10/a)*((ARC10Ha)) THC10Ha;
 
 bar(barplot2);
 set(gca,'xticklabel', names2);
-title('people trains with delay');
+%title('people trains with delay');
 legend('People with delay', 'People without delay', 'through passengers');
 
 % %mean of min delays
@@ -757,7 +757,7 @@ barplot3 = [mean(delayArrayK10)
 
 bar(barplot3);
 set(gca, 'xticklabel', names2);
-title('mean of minutes delay for each train');
+%title('mean of minutes delay for each train');
 
 figure
 subplot(2,1,1);
