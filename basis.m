@@ -3,6 +3,7 @@ function [] = basis
 %version 1: current situation, to compare with
 %version 2: Lindo result
 v=2;
+plot=1;
 
 lindoRes = transformLindoData('lindoResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
@@ -657,138 +658,174 @@ total_cost_of_transfers= sum(cost_of_transfers)/a
 totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers + total_cost_through_passengers
 
 
+
 %% Plotting all the information about delays and missed transfers
-close all
-%Missed transfers
-
-figure
-subplot(3,1,1);
-barplot = [missedC10K20/(a/100)
-    missedK11C21/(a/100)
-    missedK11C10/(a/100)
-    missedK10E20/(a/100)
-    missedK10M20/(a/100)
-    missedE11K21/(a/100)
-    missedM11K21/(a/100)
-    missedM11K10/(a/100)];
-
-names =  {'C10K20'
-    'K11C21'
-    'K11C10'
-    'K10E20'
-    'K10M20'
-    'E11K21'
-    'M11K21'
-    'M11K10'};
-
-bar(barplot);
-set(gca,'xticklabel',names);
-title('percentage missed transfers');
-        
-%people missed transfer compare 
-subplot(3,1,2);
-barplot = [missedC10K20/a*TC10K20 (1-missedC10K20/a)*TC10K20;
-    missedK11C21/a*TK11C21 (1-missedK11C21/a)*TK11C21;
-    missedK11C10/a*TK11C10 (1-missedK11C10/a)*TK11C10;
-    missedK10E20/a*TK10E20 (1-missedK10E20/a)*TK10E20;
-    missedK10M20/a*TK10M20 (1-missedK10M20/a)*TK10M20;
-    missedE11K21/a*TE11K21 (1-missedE11K21/a)*TE11K21;
-    missedM11K21/a*TM11K21 (1-missedM11K21/a)*TM11K21;
-    missedM11K10/a*TM11K10 (1-missedM11K10/a)*TM11K10];
-
-
-bar(barplot);
-set(gca,'xticklabel',names);
-title('compare people missed transfers with people who didn''t miss transfer');
-legend('People missed transfer', 'People who didn''t miss transfer');
-%people missed transfer compare 
-subplot(3,1,3);
-barplot = [missedC10K20/a*TC10K20
-    missedK11C21/a*TK11C21
-    missedK11C10/a*TK11C10 
-    missedK10E20/a*TK10E20 
-    missedK10M20/a*TK10M20 
-    missedE11K21/a*TE11K21
-    missedM11K21/a*TM11K21 
-    missedM11K10/a*TM11K10];
-
-
-bar(barplot);
-set(gca,'xticklabel',names);
-title('people missed transfers');
-
-%Delay on trains
-figure
-subplot(3,1,1); 
-barplot2 = [delayC10/(a/100)
-            delayE11/(a/100)
-            delayK10/(a/100)
-            delayK11/(a/100)
-            delayM11/(a/100)];
-names2 = {'delayC10'
-            'delayE11'
-            'delayK10'
-            'delayK11'
-            'delayM11'};
-bar(barplot2);
-set(gca,'xticklabel', names2);
-title('percentage trains with delay');
-
-%people delay on trains
-subplot(3,1,2); 
-barplot2 = [delayC10/a*((ARC10Ha)) (1-delayC10/a)*((ARC10Ha)) THC10Ha;
-            delayE11/a*(ARE11Le) (1-delayE11/a)*(ARE11Le) THE11Le;
-            delayK10/a*(ARK10Le) (1-delayK10/a)*(ARK10Le) THK10Le;
-            delayK11/a*(ARK11Ha) (1-delayK11/a)*(ARK11Ha) THK11Ha;
-            delayM11/a*(ARM11Le) (1-delayM11/a)*(ARM11Le) THM11Le];
-
-bar(barplot2);
-set(gca,'xticklabel', names2);
-title('people trains with delay');
-legend('People with delay', 'People without delay', 'through passengers');
-
-% %mean of min delays
-subplot(3,1,3);
-barplot3 = [mean(delayArrayK10)
-    mean(delayArrayE11)
-    mean(delayArrayC10)
-    mean(delayArrayK11)
-    mean(delayArrayM11) ];
-
-bar(barplot3);
-set(gca, 'xticklabel', names2);
-title('mean of minutes delay for each train');
-
-figure
-subplot(2,1,1);
-barplot7 = [length(costTHC10)
-    length(costTHE11)
-    length(costTHK10)
-    length(costTHK11)
-    length(costTHM11)
-    ];
-
-names3 = {'costEarlyC10'
-            'costEarlyE11'
-            'costEarlyK10'
-            'costEarlyK11'
-            'costEarlyM11'};
-bar(barplot7);
-set(gca, 'xticklabel', names3);
-title('amount of trains with cost bc of early arrival (through train costs)');
-
-subplot(2,1,2);
-barplot8 = [mean(costTHC10)
-    mean(costTHE11)
-    mean(costTHK10)
-    mean(costTHK11)
-    mean(costTHM11)
-    ];
-
-bar(barplot8);
-set(gca, 'xticklabel', names3);
-title('mean of cost early arrival');
-
+if plot
+    close all
+    %Missed transfers
+    
+    figure
+    subplot(3,1,1);
+    barplot = [missedC10K20/(a/100)
+        missedK11C21/(a/100)
+        missedK11C10/(a/100)
+        missedK10E20/(a/100)
+        missedK10M20/(a/100)
+        missedE11K21/(a/100)
+        missedM11K21/(a/100)
+        missedM11K10/(a/100)];
+    
+    names =  {'C10K20'
+        'K11C21'
+        'K11C10'
+        'K10E20'
+        'K10M20'
+        'E11K21'
+        'M11K21'
+        'M11K10'};
+    
+    bar(barplot);
+    set(gca,'xticklabel',names);
+    title('percentage missed transfers');
+    
+    %people missed transfer compare
+    subplot(3,1,2);
+    barplot = [missedC10K20/a*TC10K20 (1-missedC10K20/a)*TC10K20;
+        missedK11C21/a*TK11C21 (1-missedK11C21/a)*TK11C21;
+        missedK11C10/a*TK11C10 (1-missedK11C10/a)*TK11C10;
+        missedK10E20/a*TK10E20 (1-missedK10E20/a)*TK10E20;
+        missedK10M20/a*TK10M20 (1-missedK10M20/a)*TK10M20;
+        missedE11K21/a*TE11K21 (1-missedE11K21/a)*TE11K21;
+        missedM11K21/a*TM11K21 (1-missedM11K21/a)*TM11K21;
+        missedM11K10/a*TM11K10 (1-missedM11K10/a)*TM11K10];
+    
+    
+    bar(barplot);
+    set(gca,'xticklabel',names);
+    title('compare people missed transfers with people who didn''t miss transfer');
+    legend('Passengers who missed transfer', 'Passengers who didn''t miss transfer');
+    %people missed transfer compare
+    subplot(3,1,3);
+    barplot = [missedC10K20/a*TC10K20
+        missedK11C21/a*TK11C21
+        missedK11C10/a*TK11C10
+        missedK10E20/a*TK10E20
+        missedK10M20/a*TK10M20
+        missedE11K21/a*TE11K21
+        missedM11K21/a*TM11K21
+        missedM11K10/a*TM11K10];
+    
+    
+    bar(barplot);
+    set(gca,'xticklabel',names);
+    title('people missed transfers');
+    
+    %Delay on trains
+    figure
+    subplot(3,1,1);
+    barplot2 = [delayC10/(a/100)
+        delayE11/(a/100)
+        delayK10/(a/100)
+        delayK11/(a/100)
+        delayM11/(a/100)];
+    names2 = {'delayC10'
+        'delayE11'
+        'delayK10'
+        'delayK11'
+        'delayM11'};
+    bar(barplot2);
+    set(gca,'xticklabel', names2);
+    title('percentage trains with delay');
+    
+    %people delay on trains
+    subplot(3,1,2);
+    barplot2 = [delayC10/a*((ARC10Ha)) (1-delayC10/a)*((ARC10Ha)) THC10Ha;
+        delayE11/a*(ARE11Le) (1-delayE11/a)*(ARE11Le) THE11Le;
+        delayK10/a*(ARK10Le) (1-delayK10/a)*(ARK10Le) THK10Le;
+        delayK11/a*(ARK11Ha) (1-delayK11/a)*(ARK11Ha) THK11Ha;
+        delayM11/a*(ARM11Le) (1-delayM11/a)*(ARM11Le) THM11Le];
+    names4 = {'passengersC10'
+        'passengersE11'
+        'passengersK10'
+        'passengersK11'
+        'passengersM11'};
+    bar(barplot2);
+    set(gca,'xticklabel', names4);
+    title('Types of passengers on each train');
+    legend('Passengers with delay', 'Passengers without delay', 'through passengers');
+    
+    % %mean of min delays
+    subplot(3,1,3);
+    barplot3 = [mean(delayArrayK10)
+        mean(delayArrayE11)
+        mean(delayArrayC10)
+        mean(delayArrayK11)
+        mean(delayArrayM11) ];
+    
+    names5 = {'minDelayC10'
+        'minDelayE11'
+        'minDelayK10'
+        'minDelayK11'
+        'minDelayM11'};
+    bar(barplot3);
+    set(gca, 'xticklabel', names5);
+    title('mean of minutes delay for each train');
+    
+    figure
+    subplot(2,1,1);
+    barplot7 = [length(costTHC10)
+        length(costTHE11)
+        length(costTHK10)
+        length(costTHK11)
+        length(costTHM11)
+        ];
+    
+    names3 = {'costEarlyC10'
+        'costEarlyE11'
+        'costEarlyK10'
+        'costEarlyK11'
+        'costEarlyM11'};
+    
+    names6 = {'EarlyC10'
+        'EarlyE11'
+        'EarlyK10'
+        'EarlyK11'
+        'EarlyM11'};
+    bar(barplot7);
+    set(gca, 'xticklabel', names6);
+    title('amount of trains with cost bc of early arrival (through train costs)');
+    
+    subplot(2,1,2);
+    barplot8 = [mean(costTHC10)
+        mean(costTHE11)
+        mean(costTHK10)
+        mean(costTHK11)
+        mean(costTHM11)
+        ];
+    
+    bar(barplot8);
+    set(gca, 'xticklabel', names3);
+    title('mean cost early arrival');
+    
+    figure
+    barplot9= [ARC10Ha THC10Ha (TC10K20);
+        ARK11Ha THK11Ha (TK11C21 + TK11C10);
+        ARK10Le THK10Le (TK10E20 + TK10M20);
+        ARE11Le THE11Le (TE11K21);
+        ARM11Le THM11Le (TM11K21 + TM11K10);
+        ];
+    
+    names7 = {'C10'
+        'K11'
+        'K10'
+        'E11'
+        'M11'
+        };
+    bar(barplot9);
+    legend('Arriving Passengers','Through Passengers','Transfering Passengers');
+    set(gca, 'xticklabel',names7);
+    title('Types of passenger on the train at the transfer point');
+end
 %%
 
 
