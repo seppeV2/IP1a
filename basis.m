@@ -5,7 +5,7 @@ function [] = basis
 v=2;
 plot=1;
 
-lindoRes = transformLindoData('lindoResults.txt');
+lindoRes = transformLindoData('originalResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
 STK1AL	=	lindoRes.STK1AL	;
 STE1AA	=	lindoRes.STE1AA	;
@@ -656,8 +656,6 @@ total_cost_through_passengers= sum(cost_through_passengers)/a
 total_cost_of_transfers= sum(cost_of_transfers)/a
 
 totale_kost= stopping_cost + total_cost_arriving_late + total_cost_of_transfers + total_cost_through_passengers
-
-
 
 %% Plotting all the information about delays and missed transfers
 if plot
