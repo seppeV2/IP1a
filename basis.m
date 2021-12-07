@@ -5,7 +5,7 @@ function [] = basis
 v=2;
 plot=1;
 
-lindoRes = transformLindoData('originalResults.txt');
+lindoRes = transformLindoData('lindoResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
 STK1AL	=	lindoRes.STK1AL	;
 STE1AA	=	lindoRes.STE1AA	;
@@ -684,7 +684,7 @@ if plot
     
     bar(barplot);
     set(gca,'xticklabel',names);
-    title('percentage missed transfers');
+    title('Percentage missed transfers');
     
     %people missed transfer compare
     subplot(3,1,2);
@@ -700,7 +700,7 @@ if plot
     
     bar(barplot);
     set(gca,'xticklabel',names);
-    title('compare people missed transfers with people who didn''t miss transfer');
+    title('Comparison of types of passengers considering missed transfers');
     legend('Passengers who missed transfer', 'Passengers who didn''t miss transfer');
     %people missed transfer compare
     subplot(3,1,3);
@@ -716,7 +716,8 @@ if plot
     
     bar(barplot);
     set(gca,'xticklabel',names);
-    title('people missed transfers');
+    title('Number of passengers who missed their transfer');
+
     
     %Delay on trains
     figure
@@ -733,7 +734,7 @@ if plot
         'delayM11'};
     bar(barplot2);
     set(gca,'xticklabel', names2);
-    title('percentage trains with delay');
+    title('Percentage of trains with delay');
     
     %people delay on trains
     subplot(3,1,2);
@@ -749,7 +750,7 @@ if plot
         'passengersM11'};
     bar(barplot2);
     set(gca,'xticklabel', names4);
-    title('Types of passengers on each train');
+    title('Comparison of types of passengers considering the delay');
     legend('Passengers with delay', 'Passengers without delay', 'through passengers');
     
     % %mean of min delays
@@ -767,7 +768,7 @@ if plot
         'minDelayM11'};
     bar(barplot3);
     set(gca, 'xticklabel', names5);
-    title('mean of minutes delay for each train');
+    title('Mean of minutes delay for each train');
     
     figure
     subplot(2,1,1);
@@ -791,7 +792,7 @@ if plot
         'EarlyM11'};
     bar(barplot7);
     set(gca, 'xticklabel', names6);
-    title('amount of trains with cost bc of early arrival (through train costs)');
+    title('Trains with cost from early arrival (through train costs)');
     
     subplot(2,1,2);
     barplot8 = [mean(costTHC10)
@@ -803,7 +804,7 @@ if plot
     
     bar(barplot8);
     set(gca, 'xticklabel', names3);
-    title('mean cost early arrival');
+    title('Mean of early arrival cost');
     
     figure
     barplot9= [ARC10Ha THC10Ha (TC10K20);
