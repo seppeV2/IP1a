@@ -2,10 +2,11 @@ function [] = basis
 %2 versions
 %version 1: current situation, to compare with
 %version 2: Lindo result
-v=2;
+v=1;
 plot=1;
+ import mlreportgen.ppt.*
 
-lindoRes = transformLindoData('lindoResults.txt');
+lindoRes = transformLindoData('originalResults.txt');
 %HIER KOLOMMEN MET LINDO resultaten kopiëren (via excel?):
 STK1AL	=	lindoRes.STK1AL	;
 STE1AA	=	lindoRes.STE1AA	;
@@ -698,7 +699,7 @@ if plot
         missedM11K10/a*TM11K10 (1-missedM11K10/a)*TM11K10];
     
     
-    bar(barplot);
+    bar(barplot,'EdgeColor',[0 .9 .9],'LineWidth',1.5);
     set(gca,'xticklabel',names);
     title('Comparison of types of passengers considering missed transfers');
     legend('Passengers who missed transfer', 'Passengers who didn''t miss transfer');
@@ -743,15 +744,16 @@ if plot
         delayK10/a*(ARK10Le) (1-delayK10/a)*(ARK10Le) THK10Le;
         delayK11/a*(ARK11Ha) (1-delayK11/a)*(ARK11Ha) THK11Ha;
         delayM11/a*(ARM11Le) (1-delayM11/a)*(ARM11Le) THM11Le];
+   
     names4 = {'passengersC10'
         'passengersE11'
         'passengersK10'
         'passengersK11'
         'passengersM11'};
-    bar(barplot2);
+    bar(barplot2,'EdgeColor',[0 .9 .9],'LineWidth',1.5)
     set(gca,'xticklabel', names4);
     title('Comparison of types of passengers considering the delay');
-    legend('Passengers with delay', 'Passengers without delay', 'through passengers');
+    legend('Passengers with delay', 'Passengers without delay', 'Through passengers');
     
     % %mean of min delays
     subplot(3,1,3);
@@ -766,7 +768,7 @@ if plot
         'minDelayK10'
         'minDelayK11'
         'minDelayM11'};
-    bar(barplot3);
+    bar(barplot3,'EdgeColor',[0 .9 .9],'LineWidth',1.5);
     set(gca, 'xticklabel', names5);
     title('Mean of minutes delay for each train');
     
